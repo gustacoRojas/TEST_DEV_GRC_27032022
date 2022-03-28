@@ -1,0 +1,115 @@
+﻿@model IEnumerable<WEBExamenTokaMVC.Models.personasToka>
+
+<h1>@ViewData["Clientes Toka"]</h1>
+
+<div class="text-center">
+    <div class="tituloContenido">
+        <div class="title">Clientes Toka</div>
+    </div>
+
+    <table class="tGeneral" id="exampleP">
+        <thead>
+            <tr class="responsive recolor">
+                <th class="responsive">
+                    ID Cliente
+                </th>
+                <th class="responsive">
+                    Fecha de Registro
+                </th>
+                <th class="responsive">
+                    Razon Social
+                </th>
+                <th class="responsive">
+                    RFC
+                </th>
+                <th class="responsive">
+                    Sucursal
+                </th>
+                <th class="responsive">
+                    Id de empleado
+                </th>
+                <th class="responsive">
+                    Nombre
+                </th>
+                <th class="responsive">
+                    Apellido Paterno
+                </th>
+                <th class="responsive">
+                    Apellido Materno
+                </th>
+                <th class="responsive">
+                    Id viaje
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.idCliente)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fechaRegistro)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.razonSocial)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.rfc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sucursal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.idCliente)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Paterno)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Materno)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.idViaje)
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <br>
+
+    <button id="exportarExcel">Exportar a Excel</button>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#exampleP').DataTable();
+
+    });
+
+    $(document).ready(() => {
+        $("#exportarExcel").click(function () {
+            $("#exampleP").table2excel({
+                // exclude CSS class
+                exclude: ".noExl",
+                name: "Worksheet Name",
+                filename: "SomeFile",
+                fileext: ".xls"
+            });
+        });
+    });
+
+
+
+
+</script>
+

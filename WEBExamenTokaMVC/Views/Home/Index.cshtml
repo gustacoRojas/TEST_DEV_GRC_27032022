@@ -1,0 +1,85 @@
+﻿@model IEnumerable<WEBExamenTokaMVC.Models.Persona>
+@{
+    ViewData["Title"] = "Personas fisicas";
+}
+
+<div class="text-center">
+    <div class="tituloContenido">
+        <div class="title">Personas fisicas</div>
+    </div>
+
+    <table class="tGeneral" id="example">
+        <thead>
+        <tr class="responsive recolor">
+            <th class="responsive">
+                ID
+            </th>
+            <th class="responsive">
+                Nombre
+            </th>
+            <th class="responsive">
+                Apellido Paterno
+            </th>
+            <th class="responsive">
+                Apellido Materno
+            </th>
+            <th class="responsive">
+                RFC
+            </th>
+            <th class="responsive">
+                Fecha de Nacimiento
+            </th>
+            <th class="responsive">
+                Usuario que agregó
+            </th>
+            <th class="responsive">
+                Editar
+            </th>
+            <th class="responsive">
+                Eliminar
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.apellidoPa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.apellidoMa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.rfc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fechaNacimiento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.usuarioAgrega)
+                    </td>
+                    <td>
+                        <i class="fa fa-floppy-o" id="activ" aria-hidden="true" onclick="determinaCajaEdita(@Html.DisplayFor(modelItem => item.id),'@Html.DisplayFor(modelItem => item.nombre)',
+                    '@Html.DisplayFor(modelItem => item.apellidoPa)', '@Html.DisplayFor(modelItem => item.apellidoMa)', '@Html.DisplayFor(modelItem => item.rfc)',
+                    '@Html.DisplayFor(modelItem => item.fechaNacimiento)', @Html.DisplayFor(modelItem => item.usuarioAgrega),)"></i>
+
+                    </td>
+                    <td>
+
+                        <i class="fa fa-trash" id="activ" aria-hidden="true" onclick="determinaBaja(@Html.DisplayFor(modelItem => item.id))"></i>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
