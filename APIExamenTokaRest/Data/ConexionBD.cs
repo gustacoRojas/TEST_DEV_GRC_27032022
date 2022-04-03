@@ -55,8 +55,8 @@ namespace APIExamenTokaRest.Data
                 
             }
             catch (Exception Excepcion) {
-                short myCategory = 10;
-                //EventLog.WriteEntry("APIExamenTokaRest", Excepcion.Message, EventLogEntryType.Information, 14, myCategory);
+                
+                EventLog.WriteEntry("APIExamenTokaRest", Excepcion.Message, EventLogEntryType.Information, 999);
             }
             finally {
                 _SqlConnetion.Close();

@@ -12,6 +12,8 @@ using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Text;
 using Newtonsoft.Json.Linq;
+using Nancy.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WEBExamenTokaMVC.Controllers
 {
@@ -25,89 +27,222 @@ namespace WEBExamenTokaMVC.Controllers
             _logger = logger;
         }
 
-        
+
         public async Task<ActionResult> Index()
         {
             List<Persona> personasFisicas = new List<Persona>();
-
-            using(var client = new HttpClient()) {
-
-                client.BaseAddress = new Uri(WEBConfigModel.uriBaseAPI);
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                HttpResponseMessage response = await client.GetAsync(WEBConfigModel.uriEspeAPI);
-                if (response.IsSuccessStatusCode)
+            try {
+                using (var client = new HttpClient())
                 {
-                    var personaResponse = response.Content.ReadAsStringAsync().Result;
 
-                    personasFisicas = JsonConvert.DeserializeObject<List<Persona>>(personaResponse);
+                    client.BaseAddress = new Uri(WEBConfigModel.uriBaseAPI);
+                    client.DefaultRequestHeaders.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+                    HttpResponseMessage response = await client.GetAsync(WEBConfigModel.uriEspeAPI);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var personaResponse = response.Content.ReadAsStringAsync().Result;
+
+                        personasFisicas = JsonConvert.DeserializeObject<List<Persona>>(personaResponse);
+
+                    }
                 }
+
+            } catch (Exception ex) {
+
+                EventLog.WriteEntry("WEBExamenTokaMVC", ex.Message, EventLogEntryType.Information, 999);
             }
+
 
             return View(personasFisicas);
         }
 
-        public async Task<ActionResult> Privacy()
+       [HttpGet]
+        public async Task<ActionResult> EliminaPersonaFisica(int idPersona)
         {
-                        
-            JObject jsonToken = new JObject();
 
+            string resultado = string.Empty;
 
-
-            using (var client = new HttpClient())
+            try
             {
-
-                var logginToken = new userTokenToka();
-                logginToken.Username = WEBConfigModel.userApiToken;
-                logginToken.Password = WEBConfigModel.passApiToken;
-
-                var json = JsonConvert.SerializeObject(logginToken);
-                var data = new StringContent(json, Encoding.UTF8, "application/json");
-
-                var response = await client.PostAsync(WEBConfigModel.urlTokenToka, data);
-
-
-                if (response.IsSuccessStatusCode)
+                using (var client = new HttpClient())
                 {
 
-                    string content = response.Content.ReadAsStringAsync().Result;
-                    jsonToken = JObject.Parse(content);
+                    client.BaseAddress = new Uri(WEBConfigModel.uriBaseAPI);
+                    client.DefaultRequestHeaders.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    HttpResponseMessage response = await client.DeleteAsync(WEBConfigModel.uriEspeAPI+idPersona);
+                    
+                    resultado = response.Content.ReadAsStringAsync().Result;
                     
                 }
+
             }
-            tokenToka deserializedToken = JsonConvert.DeserializeObject<tokenToka>(jsonToken.ToString()); ;
-
-
-
-            ResulPersonasToka resListaPersonasToka = new ResulPersonasToka();
-
-            List<personasToka> listPersonasTokas = new List<personasToka>();
-
-            using (var client = new HttpClient())
+            catch (Exception ex)
             {
 
-                
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", deserializedToken.Data);
+                EventLog.WriteEntry("WEBExamenTokaMVC", ex.Message, EventLogEntryType.Information, 999);
+            }
 
-                HttpResponseMessage response = await client.GetAsync(WEBConfigModel.urlPersonasToka);
-                if (response.IsSuccessStatusCode)
+
+            var jsonSerialiser = new JavaScriptSerializer();
+            var msjJson = jsonSerialiser.Serialize(resultado);
+            return Json(msjJson);
+        }
+
+
+        [HttpGet]
+        public async Task<ActionResult> AgregaPersonaFisica(int idPersona, string nombre, string app, string apm, string rfc, int agregaUsr, string fecha)
+        {
+            DateTime date = Convert.ToDateTime(fecha);
+            string resultado = string.Empty;
+
+            try
+            {
+                using (var client = new HttpClient())
                 {
-                    var personaResponse = response.Content.ReadAsStringAsync().Result;
-                    JObject jsonPersonas = JObject.Parse(personaResponse);
-                    resListaPersonasToka = JsonConvert.DeserializeObject<ResulPersonasToka>(jsonPersonas.ToString());
 
-                    listPersonasTokas = resListaPersonasToka.Data;
+                    var nuevaPersona = new Persona();
+                    nuevaPersona.id = idPersona;
+                    nuevaPersona.nombre = nombre;
+                    nuevaPersona.apellidoPa = app;
+                    nuevaPersona.apellidoMa = apm;
+                    nuevaPersona.rfc = rfc;
+                    nuevaPersona.usuarioAgrega = agregaUsr;
+                    nuevaPersona.fechaNacimiento = date;
+
+                    var json = JsonConvert.SerializeObject(nuevaPersona);
+                    var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    client.BaseAddress = new Uri(WEBConfigModel.uriBaseAPI);
+                    var response = await client.PostAsync(WEBConfigModel.uriEspeAPI, data);
+
+                    resultado = response.Content.ReadAsStringAsync().Result;
 
                 }
+
+            }
+            catch (Exception ex)
+            {
+
+                EventLog.WriteEntry("WEBExamenTokaMVC", ex.Message, EventLogEntryType.Information, 999);
+            }
+
+
+            var jsonSerialiser = new JavaScriptSerializer();
+            var msjJson = jsonSerialiser.Serialize(resultado);
+            return Json(msjJson);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> EditaPersonaFisica(int idPersona, string nombre, string app, string apm, string rfc, int agregaUsr, string fecha)
+        {
+            DateTime date = Convert.ToDateTime(fecha);
+      
+            string resultado = string.Empty;
+
+            try
+            {
+                using (var client = new HttpClient())
+                {
+
+                    var nuevaPersona = new Persona();
+                    nuevaPersona.id = idPersona;
+                    nuevaPersona.nombre = nombre;
+                    nuevaPersona.apellidoPa = app;
+                    nuevaPersona.apellidoMa = apm;
+                    nuevaPersona.rfc = rfc;
+                    nuevaPersona.usuarioAgrega = agregaUsr;
+                    nuevaPersona.fechaNacimiento = date;
+
+                    var json = JsonConvert.SerializeObject(nuevaPersona);
+                    var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    client.BaseAddress = new Uri(WEBConfigModel.uriBaseAPI);
+                    var response = await client.PutAsync(WEBConfigModel.uriEspeAPI, data);
+
+                    resultado = response.Content.ReadAsStringAsync().Result;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                EventLog.WriteEntry("WEBExamenTokaMVC", ex.Message, EventLogEntryType.Information, 999);
+            }
+
+
+            var jsonSerialiser = new JavaScriptSerializer();
+            var msjJson = jsonSerialiser.Serialize(resultado);
+            return Json(msjJson);
+        }
+
+
+        public async Task<ActionResult> Privacy()
+        {
+            List<personasToka> listPersonasTokas = new List<personasToka>();
+            JObject jsonToken = new JObject();
+
+            try {
+                using (var client = new HttpClient())
+                {
+
+                    var logginToken = new userTokenToka();
+                    logginToken.Username = WEBConfigModel.userApiToken;
+                    logginToken.Password = WEBConfigModel.passApiToken;
+
+                    var json = JsonConvert.SerializeObject(logginToken);
+                    var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    var response = await client.PostAsync(WEBConfigModel.urlTokenToka, data);
+
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string content = response.Content.ReadAsStringAsync().Result;
+                        jsonToken = JObject.Parse(content);
+
+                    }
+                }
+                tokenToka deserializedToken = JsonConvert.DeserializeObject<tokenToka>(jsonToken.ToString()); ;
+
+
+
+                ResulPersonasToka resListaPersonasToka = new ResulPersonasToka();
+
+
+
+                using (var client = new HttpClient())
+                {
+
+
+                    client.DefaultRequestHeaders.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", deserializedToken.Data);
+
+                    HttpResponseMessage response = await client.GetAsync(WEBConfigModel.urlPersonasToka);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var personaResponse = response.Content.ReadAsStringAsync().Result;
+                        JObject jsonPersonas = JObject.Parse(personaResponse);
+                        resListaPersonasToka = JsonConvert.DeserializeObject<ResulPersonasToka>(jsonPersonas.ToString());
+
+                        listPersonasTokas = resListaPersonasToka.Data;
+
+                    }
+                }
+            }
+            catch (Exception ex) {
+                EventLog.WriteEntry("WEBExamenTokaMVC", ex.Message, EventLogEntryType.Information, 999);
             }
 
             return View(listPersonasTokas);
 
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -26,3 +26,31 @@ C:\Users\Taco\source\repos\APIExamenTokaRest\bin\Debug\netcoreapp3.1\runtimes\un
 C:\Users\Taco\source\repos\APIExamenTokaRest\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Taco\source\repos\APIExamenTokaRest\obj\Debug\netcoreapp3.1\APIExamenTokaRest.csproj.CopyComplete
 C:\Users\Taco\source\repos\APIExamenTokaRest\obj\Debug\netcoreapp3.1\APIExamenTokaRest.csproj.AssemblyReference.cache
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\bin\Debug\netcoreapp3.1\APIExamenTokaRest.exe
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\bin\Debug\netcoreapp3.1\APIExamenTokaRest.deps.json
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\bin\Debug\netcoreapp3.1\APIExamenTokaRest.runtimeconfig.json
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\bin\Debug\netcoreapp3.1\APIExamenTokaRest.runtimeconfig.dev.json
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\bin\Debug\netcoreapp3.1\APIExamenTokaRest.dll
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\bin\Debug\netcoreapp3.1\APIExamenTokaRest.pdb
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\obj\Debug\netcoreapp3.1\APIExamenTokaRest.csproj.AssemblyReference.cache
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\obj\Debug\netcoreapp3.1\APIExamenTokaRest.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\obj\Debug\netcoreapp3.1\APIExamenTokaRest.AssemblyInfoInputs.cache
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\obj\Debug\netcoreapp3.1\APIExamenTokaRest.AssemblyInfo.cs
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\obj\Debug\netcoreapp3.1\APIExamenTokaRest.csproj.CoreCompileInputs.cache
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\obj\Debug\netcoreapp3.1\APIExamenTokaRest.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\obj\Debug\netcoreapp3.1\staticwebassets\APIExamenTokaRest.StaticWebAssets.Manifest.cache
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\obj\Debug\netcoreapp3.1\staticwebassets\APIExamenTokaRest.StaticWebAssets.xml
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\obj\Debug\netcoreapp3.1\scopedcss\bundle\APIExamenTokaRest.styles.css
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\obj\Debug\netcoreapp3.1\APIExamenTokaRest.RazorTargetAssemblyInfo.cache
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\obj\Debug\netcoreapp3.1\APIExamenTokaRest.csproj.CopyComplete
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\obj\Debug\netcoreapp3.1\APIExamenTokaRest.dll
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\obj\Debug\netcoreapp3.1\APIExamenTokaRest.pdb
+C:\Users\Taco\Desktop\Examen Toka\Repo\APIExamenTokaRest\obj\Debug\netcoreapp3.1\APIExamenTokaRest.genruntimeconfig.cache

@@ -10,35 +10,35 @@
 
     <table class="tGeneral" id="example">
         <thead>
-        <tr class="responsive recolor">
-            <th class="responsive">
-                ID
-            </th>
-            <th class="responsive">
-                Nombre
-            </th>
-            <th class="responsive">
-                Apellido Paterno
-            </th>
-            <th class="responsive">
-                Apellido Materno
-            </th>
-            <th class="responsive">
-                RFC
-            </th>
-            <th class="responsive">
-                Fecha de Nacimiento
-            </th>
-            <th class="responsive">
-                Usuario que agregó
-            </th>
-            <th class="responsive">
-                Editar
-            </th>
-            <th class="responsive">
-                Eliminar
-            </th>
-        </tr>
+            <tr class="responsive recolor">
+                <th class="responsive">
+                    ID
+                </th>
+                <th class="responsive">
+                    Nombre
+                </th>
+                <th class="responsive">
+                    Apellido Paterno
+                </th>
+                <th class="responsive">
+                    Apellido Materno
+                </th>
+                <th class="responsive">
+                    RFC
+                </th>
+                <th class="responsive">
+                    Fecha de Nacimiento
+                </th>
+                <th class="responsive">
+                    Usuario que agregó
+                </th>
+                <th class="responsive">
+                    Editar
+                </th>
+                <th class="responsive">
+                    Eliminar
+                </th>
+            </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
@@ -68,18 +68,357 @@
                         @Html.DisplayFor(modelItem => item.usuarioAgrega)
                     </td>
                     <td>
-                        <i class="fa fa-floppy-o" id="activ" aria-hidden="true" onclick="determinaCajaEdita(@Html.DisplayFor(modelItem => item.id),'@Html.DisplayFor(modelItem => item.nombre)',
-                    '@Html.DisplayFor(modelItem => item.apellidoPa)', '@Html.DisplayFor(modelItem => item.apellidoMa)', '@Html.DisplayFor(modelItem => item.rfc)',
-                    '@Html.DisplayFor(modelItem => item.fechaNacimiento)', @Html.DisplayFor(modelItem => item.usuarioAgrega),)"></i>
+                        <i class="bi bi-pencil-square" data-toggle="modal" data-target="#editModal" onclick="determinaEdit(@Html.DisplayFor(modelItem => item.id),
+    '@Html.DisplayFor(modelItem => item.nombre)', '@Html.DisplayFor(modelItem => item.apellidoPa)', '@Html.DisplayFor(modelItem => item.apellidoMa)', '@Html.DisplayFor(modelItem => item.rfc)',
+@Html.DisplayFor(modelItem => item.usuarioAgrega),'@Html.DisplayFor(modelItem => item.fechaNacimiento)')"></i>
 
                     </td>
                     <td>
 
-                        <i class="fa fa-trash" id="activ" aria-hidden="true" onclick="determinaBaja(@Html.DisplayFor(modelItem => item.id))"></i>
+                        <i class="bi bi-trash-fill" data-toggle="modal" data-target="#bajaModal" onclick="determinaBaja(@Html.DisplayFor(modelItem => item.id))"></i>
 
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+    <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#altaModal">Agregar usuario</button>
 </div>
+
+
+<div class="modal fade" id="altaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agrega nuevo registro persona</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInput1">Nombre</label>
+                        <input type="text" class="form-control" id="idTxtNombreAlta" onkeypress="return validaLetra(event)" onkeyup="validaVacioAltaUsr()">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInput2">Apellido Paterno</label>
+                        <input type="text" class="form-control" id="idTxtAppAlta" onkeypress="return validaLetra(event)" onkeyup="validaVacioAltaUsr()">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInput3">Apellido Materno</label>
+                        <input type="text" class="form-control" id="idTxtApmAlta" onkeypress="return validaLetra(event)" onkeyup="validaVacioAltaUsr()">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInput4">RFC</label>
+                        <input type="text" class="form-control" id="idTxtRfcAlta" onkeypress="return validaLetra(event)" onkeyup="validaVacioAltaUsr()">
+                    </div>
+
+
+                    <div class="form-group">
+                        <div id="sandbox-container">
+                            <label for="exampleInput5">Fecha Nacimiento</label>
+                            <div class="input-group date">
+                                <input type="text" class="form-control" id="idFechaAlta" onkeydown="return false"><span class="input-group-addon"></span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" id="contentBtnAlta">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btnAlta" onclick="agregarPersona(1)">Agregar persona</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edita registro persona</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInput1">Nombre</label>
+                        <input type="text" class="form-control" id="idTxtNombreEdit" onkeypress="return validaLetra(event)" onkeyup="validaVacioEditaUsr()">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInput2">Apellido Paterno</label>
+                        <input type="text" class="form-control" id="idTxtAppEdit" onkeypress="return validaLetra(event)" onkeyup="validaVacioEditaUsr()">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInput3">Apellido Materno</label>
+                        <input type="text" class="form-control" id="idTxtApmEdit" onkeypress="return validaLetra(event)" onkeyup="validaVacioEditaUsr()">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInput4">RFC</label>
+                        <input type="text" class="form-control" id="idTxtRfcEdit" onkeypress="return validaLetra(event)" onkeyup="validaVacioEditaUsr()">
+                    </div>
+                    <div class="form-group">
+                        <div id="sandbox-container">
+                            <label for="exampleInput5">Fecha Nacimiento</label>
+                            <div class="input-group date">
+                                <input type="text" class="form-control" id="idTxtAFechaEdit" onkeydown="return false"><span class="input-group-addon"></span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" id="contentBtnEdita">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnEdit" class="btn btn-primary">Confirmar cambio</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="bajaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Elimina usuarios</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Esta seguro de eliminar este elemento?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnBaja" class="btn btn-primary">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-sm" id="modalMsj" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="mySmallModalLabel">Mensaje del sistema</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <center>
+                <div class="modal-content" id="msjModal" />
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Aceptar</a>
+            </center>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+    $('#sandbox-container .input-group.date').datepicker({
+        startView: 1,
+        clearBtn: true,
+        calendarWeeks: true,
+        autoclose: true,
+        todayHighlight: true,
+        format: 'dd/mm/yyyy',
+        onSelect: function () {
+            alidaVacioAltaUsr();
+        }
+    }).on("change", function () {
+        validaVacioAltaUsr();
+    });
+
+
+    function determinaBaja(idPersona) {
+
+        //se asigna la baja del usuario
+        window.$("#btnBaja").attr("onclick", "borraPersona(" + idPersona + ")");
+
+    }
+
+    function determinaEdit(idPersona,nomPersona,appPersona,apmPersona,rfcPersona,agrePersona,fechaPersona) {
+
+            //se asigna la baja del usuario
+        window.$("#btnBaja").attr("onclick", "borraPersona(" + idPersona + ")");
+
+
+        document.getElementById('idTxtNombreEdit').value = nomPersona;
+        document.getElementById('idTxtAppEdit').value = appPersona;
+        document.getElementById('idTxtApmEdit').value = apmPersona;
+        document.getElementById('idTxtRfcEdit').value = rfcPersona;
+        document.getElementById('idTxtAFechaEdit').value = fechaPersona.substring(0, 10);
+
+
+        window.$("#btnEdit").attr("onclick", "editaPersona(" + idPersona + "," + agrePersona + ")");
+
+    }
+
+    function borraPersona(id) {
+
+            window.$.ajax({
+                type: "GET",
+                url: "@Url.Action("EliminaPersonaFisica")",
+                async: true,
+                data: { idPersona: id },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var datos = JSON.parse(response);
+
+                    if (datos.length === 0) {
+
+                        var resultado = "No es posible dar de baja el registro seleccionado, favor de intentarlo mas tarde o contacte a sistemas";
+
+                        document.getElementById('msjModal').innerHTML = resultado;
+
+                    } else {
+
+                        if (datos === '"Registro exitoso"') {
+
+                            var url = '@Url.Action("index")';
+                                window.location.href = url;
+
+                        } else {
+                            document.getElementById('msjModal').innerHTML = datos;
+                            $('#bajaModal').modal('hide');
+                            $('#modalMsj').modal('show');
+                        }
+
+
+                    }
+
+
+
+                },
+                error: function (result) {
+
+                    var resultado = "No es posible llevar a cabo la operación: ERROR " + result.status + " - " + result.statusText + "";
+
+                    document.getElementById('msjModal').innerHTML = resultado;
+                    $('#bajaModal').modal('hide');
+                    $('#modalMsj').modal('show');
+                }
+
+            });
+        }
+
+    function agregarPersona(agrega) {
+
+        var nombreAl = window.$("#idTxtNombreAlta").val();
+        var appAl = window.$("#idTxtAppAlta").val();
+        var apmAl = window.$("#idTxtApmAlta").val();
+        var rfcAl = window.$("#idTxtRfcAlta").val();
+        var fechaAl = window.$("#idFechaAlta").val();
+
+
+
+            window.$.ajax({
+                type: "GET",
+                url: "@Url.Action("AgregaPersonaFisica")",
+                async: true,
+                data: { idPersona: 0, nombre: nombreAl, app: appAl, apm: apmAl, rfc: rfcAl, agregaUsr: agrega, fecha: fechaAl },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var datos = JSON.parse(response);
+
+                    if (datos.length === 0) {
+
+                        var resultado = "No es posible agregar el registro, favor de intentarlo mas tarde o contacte a sistemas";
+
+                        document.getElementById('msjModal').innerHTML = resultado;
+
+                    } else {
+
+                        if (datos === 'Registro exitoso') {
+
+                            var url = '@Url.Action("index")';
+                                window.location.href = url;
+
+                        } else {
+                            document.getElementById('msjModal').innerHTML = datos;
+                            $('#altaModal').modal('hide');
+                            $('#modalMsj').modal('show');
+                        }
+
+                    }
+
+                },
+                error: function (result) {
+
+                    var resultado = "No es posible llevar a cabo la operación: ERROR " + result.status + " - " + result.statusText + "";
+
+                    document.getElementById('msjModal').innerHTML = resultado;
+                    $('#bajaModal').modal('hide');
+                    $('#modalMsj').modal('show');
+                }
+
+
+            });
+        }
+
+    function editaPersona(id, agrega) {
+
+        var nombreEd = window.$("#idTxtNombreEdit").val();
+        var appEd = window.$("#idTxtAppEdit").val();
+        var apmEd = window.$("#idTxtApmEdit").val();
+        var rfcEd = window.$("#idTxtRfcEdit").val();
+        var fechaEd = window.$("#idTxtAFechaEdit").val();
+
+
+
+            window.$.ajax({
+                type: "GET",
+                url: "@Url.Action("EditaPersonaFisica")",
+                async: true,
+                data: { idPersona: id, nombre: nombreEd, app: appEd, apm: apmEd, rfc: rfcEd, agregaUsr:agrega, fecha: fechaEd },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var datos = JSON.parse(response);
+
+                    if (datos.length === 0) {
+
+                        var resultado = "No es posible editar el registro seleccionado, favor de intentarlo mas tarde o contacte a sistemas";
+
+                        document.getElementById('msjModal').innerHTML = resultado;
+
+                    } else {
+
+                        if (datos === 'Registro exitoso') {
+
+                            var url = '@Url.Action("index")';
+                                window.location.href = url;
+
+                        } else {
+                            document.getElementById('msjModal').innerHTML = datos;
+                            $('#editModal').modal('hide');
+                            $('#modalMsj').modal('show');
+                        }
+
+                    }
+
+
+                },
+                error: function (result) {
+
+                    var resultado = "No es posible llevar a cabo la operación: ERROR " + result.status + " - " + result.statusText + "";
+
+                    document.getElementById('msjModal').innerHTML = resultado;
+                    $('#bajaModal').modal('hide');
+                    $('#modalMsj').modal('show');
+                }
+            });
+        }
+
+
+    </script>
+}

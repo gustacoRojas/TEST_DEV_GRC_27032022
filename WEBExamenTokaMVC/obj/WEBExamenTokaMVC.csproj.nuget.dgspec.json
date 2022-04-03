@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Taco\\source\\repos\\WEBExamenTokaMVC\\WEBExamenTokaMVC.csproj": {}
+    "C:\\Users\\Taco\\Desktop\\Examen Toka\\Repo\\WEBExamenTokaMVC\\WEBExamenTokaMVC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Taco\\source\\repos\\WEBExamenTokaMVC\\WEBExamenTokaMVC.csproj": {
+    "C:\\Users\\Taco\\Desktop\\Examen Toka\\Repo\\WEBExamenTokaMVC\\WEBExamenTokaMVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Taco\\source\\repos\\WEBExamenTokaMVC\\WEBExamenTokaMVC.csproj",
+        "projectUniqueName": "C:\\Users\\Taco\\Desktop\\Examen Toka\\Repo\\WEBExamenTokaMVC\\WEBExamenTokaMVC.csproj",
         "projectName": "WEBExamenTokaMVC",
-        "projectPath": "C:\\Users\\Taco\\source\\repos\\WEBExamenTokaMVC\\WEBExamenTokaMVC.csproj",
+        "projectPath": "C:\\Users\\Taco\\Desktop\\Examen Toka\\Repo\\WEBExamenTokaMVC\\WEBExamenTokaMVC.csproj",
         "packagesPath": "C:\\Users\\Taco\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Taco\\source\\repos\\WEBExamenTokaMVC\\obj\\",
+        "outputPath": "C:\\Users\\Taco\\Desktop\\Examen Toka\\Repo\\WEBExamenTokaMVC\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -44,9 +44,17 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Bootstrap.Datepicker": {
+              "target": "Package",
+              "version": "[1.8.0.1, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.5, )"
+            },
+            "Nancy": {
+              "target": "Package",
+              "version": "[2.0.0, )"
             },
             "bootstrap": {
               "target": "Package",

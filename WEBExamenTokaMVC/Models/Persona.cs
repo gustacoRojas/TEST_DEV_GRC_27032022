@@ -23,4 +23,13 @@ namespace WEBExamenTokaMVC.Models
             public DateTime fechaNacimiento { get; set; }
         
     }
+
+
+    public class bajaPersona
+    {
+
+        public int id { get; set; }
+
+
+    }
 }

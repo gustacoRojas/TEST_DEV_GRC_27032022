@@ -7,13 +7,20 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.standalone.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js">
+    </script>
+
+
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WEBExamenTokaMVC</a>
+                <a class="navbar-brand">WEBExamenTokaMVC</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -39,26 +46,101 @@
 
     <footer class="border-top footer text-muted">
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-     <script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+    <script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#example').DataTable();
-
-            $("exportarExcel").click(function () {
-                $("#example").table2excel({
-                    // exclude CSS class
-                    exclude: ".noExl",
-                    name: "Worksheet Name",
-                    filename: "SomeFile", //do not include extension
-                    fileext: ".xls" // file extension
-                });
-            });
-
+            validaVacioAltaUsr();
         });
+
+        
+        function validaVacioAltaUsr() {
+            
+            var nombrePersona = 1;
+            var appPersona = 1;
+            var apmPersona = 1;
+            var rfcPersona = 1;
+            var fechaPersona = 1;
+
+            window.$("#contentBtnAlta").css("display", "none");
+
+            if (window.$("#idTxtNombreAlta").val().trim() === '') {
+                nombrePersona = 0;
+            }
+            if (window.$("#idTxtAppAlta").val().trim() === '') {
+                appPersona = 0;
+            }
+            if (window.$("#idTxtApmAlta").val().trim() === '') {
+                apmPersona = 0;
+            }
+            if (window.$("#idTxtRfcAlta").val().trim() === '') {
+                rfcPersona = 0;
+            }
+            if (window.$("#idFechaAlta").val().trim() === '') {
+                fechaPersona = 0;
+            }
+           
+
+            if (nombrePersona === 1 && appPersona === 1 && apmPersona === 1 && rfcPersona === 1 && fechaPersona === 1) {
+                window.$("#contentBtnAlta").css("display", "block");
+
+            } else {
+                window.$("#contentBtnAlta").css("display", "none");
+            }
+        }
+
+        function validaVacioEditaUsr() {
+
+            var nombrePersona = 1;
+            var appPersona = 1;
+            var apmPersona = 1;
+            var rfcPersona = 1;
+            var fechaPersona = 1;
+
+            window.$("#contentBtnEdita").css("display", "none");
+
+            if (window.$("#idTxtNombreEdit").val().trim() === '') {
+                nombrePersona = 0;
+            }
+            if (window.$("#idTxtAppEdit").val().trim() === '') {
+                appPersona = 0;
+            }
+            if (window.$("#idTxtApmEdit").val().trim() === '') {
+                apmPersona = 0;
+            }
+            if (window.$("#idTxtRfcEdit").val().trim() === '') {
+                rfcPersona = 0;
+            }
+            if (window.$("#idTxtAFechaEdit").val().trim() === '') {
+                fechaPersona = 0;
+            }
+
+
+            if (nombrePersona === 1 && appPersona === 1 && apmPersona === 1 && rfcPersona === 1 && fechaPersona === 1) {
+                window.$("#contentBtnEdita").css("display", "block");
+
+            } else {
+                window.$("#contentBtnEdita").css("display", "none");
+            }
+        }
+
+        function validaLetra(e) {
+            var tecla = (document.all) ? e.keyCode : e.which;
+            //Tecla de retroceso para borrar, siempre la permite
+            if (tecla === 8) {
+                return true;
+            }
+            // Patron de entrada, en este caso solo acepta numeros
+            var patron = /[0-9-a-z-A-Z- áéíóúÁÉÍÓÚ]/;
+            var teclaFinal = String.fromCharCode(tecla);
+            return patron.test(teclaFinal);
+        } 
+
+
     </script>
 
 

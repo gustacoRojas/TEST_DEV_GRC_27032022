@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6wZll6nhwNhm4Usp4SMnJeBsFs2dp1k1nPkbbdnBbwdA2cwJE5F32WBqAofr85+w4nYfiyg2HXmk7MVelUICkA==",
+  "dgSpecHash": "mKDsk3eqg3Wru/2aPPwvBfw5FVfYaVki7YsQEpiE68Hlqur6mm5x5XKAQsss2JNH+HWmq1IBEmQjyleBUiEXUQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Taco\\source\\repos\\APIExamenTokaRest\\APIExamenTokaRest.csproj",
+  "projectFilePath": "C:\\Users\\Taco\\Desktop\\Examen Toka\\Repo\\APIExamenTokaRest\\APIExamenTokaRest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Taco\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\Taco\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

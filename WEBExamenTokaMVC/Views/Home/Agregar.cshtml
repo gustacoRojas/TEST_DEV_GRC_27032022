@@ -1,0 +1,63 @@
+﻿@model WEBExamenTokaMVC.Models.Persona
+
+@{
+    ViewData["Title"] = "Agregar";
+}
+
+<h1>Agregar</h1>
+
+<h4>Persona</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Agregar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="id" class="control-label"></label>
+                <input asp-for="id" class="form-control" />
+                <span asp-validation-for="id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="nombre" class="control-label"></label>
+                <input asp-for="nombre" class="form-control" />
+                <span asp-validation-for="nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="apellidoPa" class="control-label"></label>
+                <input asp-for="apellidoPa" class="form-control" />
+                <span asp-validation-for="apellidoPa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="apellidoMa" class="control-label"></label>
+                <input asp-for="apellidoMa" class="form-control" />
+                <span asp-validation-for="apellidoMa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="rfc" class="control-label"></label>
+                <input asp-for="rfc" class="form-control" />
+                <span asp-validation-for="rfc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="usuarioAgrega" class="control-label"></label>
+                <input asp-for="usuarioAgrega" class="form-control" />
+                <span asp-validation-for="usuarioAgrega" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fechaNacimiento" class="control-label"></label>
+                <input asp-for="fechaNacimiento" class="form-control" />
+                <span asp-validation-for="fechaNacimiento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
